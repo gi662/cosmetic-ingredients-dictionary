@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>美容成分辞典</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .filter-btn { margin: 5px; }
+    .ingredient-card { border: 1px solid #ccc; padding: 10px; margin: 10px 0; text-decoration: none; display: block; color: black; }
+    .ingredient-card:hover { background: #f0f0f0; }
+    #noResults { color: red; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>美容成分辞典</h1>
+
+  <div>
+    <input type="text" id="searchInput" placeholder="成分を検索">
+    <button id="searchBtn">検索</button>
+  </div>
+
+  <div>
+    <button class="filter-btn active" data-category="all">すべて</button>
+    <button class="filter-btn" data-category="anti-aging">エイジングケア</button>
+    <button class="filter-btn" data-category="moisturizing">保湿</button>
+    <button class="filter-btn" data-category="brightening">美白</button>
+    <button class="filter-btn" data-category="acne">ニキビケア</button>
+  </div>
+
+  <h2>成分一覧</h2>
+  <div id="noResults" style="display:none;">検索結果が見つかりませんでした</div>
+  <div id="ingredientsGrid"></div>
+
+  <script src="js/ingredients-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
