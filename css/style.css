@@ -1,0 +1,154 @@
+/* 基本スタイルとリセット */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1; /* フッターを最下部に固定 */
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* ヘッダー */
+header {
+    background: #fff;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+header h1 a {
+    color: #333;
+    text-decoration: none;
+}
+header p {
+    margin: 5px 0 0;
+    color: #666;
+}
+
+/* 検索セクション */
+.search-section {
+    margin: 40px 0;
+    text-align: center;
+}
+#search-box {
+    width: 80%;
+    max-width: 400px;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+}
+
+/* 成分一覧カード */
+#ingredient-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+.ingredient-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.ingredient-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    text-decoration: none;
+}
+.ingredient-card h3 {
+    margin-top: 0;
+    color: #0056b3;
+}
+.ingredient-card p {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+/* 成分詳細ページ */
+#ingredient-detail section {
+    background: #fff;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+#ingredient-detail h2 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    text-align: center;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+#ingredient-detail h3 {
+    font-size: 1.5rem;
+    margin-top: 0;
+    color: #333;
+    border-left: 5px solid #007bff;
+    padding-left: 10px;
+}
+#ingredient-detail ul {
+    padding-left: 20px;
+}
+
+/* フッター */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background: #333;
+    color: #fff;
+    margin-top: auto;
+}
+footer p {
+    margin: 0;
+}
+
+/* 広告プレースホルダー */
+.ad-placeholder {
+    background: #e9e9e9;
+    color: #888;
+    text-align: center;
+    padding: 40px 20px;
+    margin: 20px auto;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+    #search-box {
+        width: 100%;
+    }
+    #ingredient-list {
+        grid-template-columns: 1fr; /* スマホでは1カラムに */
+    }
+}
