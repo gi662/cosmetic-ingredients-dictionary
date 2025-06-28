@@ -1,24 +1,22 @@
+// js/main.js (更新版)
+
 document.addEventListener('DOMContentLoaded', () => {
     const ingredientList = document.getElementById('ingredient-list');
     const searchBox = document.getElementById('search-box');
     const filterTagsContainer = document.getElementById('filter-tags');
 
-    // データや要素が見つからない場合のエラーハンドリング
     if (!filterTagsContainer || typeof ingredientData === 'undefined') {
-        console.error("絞り込みタグのコンテナ、または成分データが見つかりません。");
-        if (filterTagsContainer) {
-            filterTagsContainer.innerHTML = '<p style="color: red;">エラー: 成分データの読み込みに失敗しました。js/data.jsを確認してください。</p>';
-        }
+        console.error("要素またはデータが見つかりません。");
         return;
     }
 
     let currentQuery = '';
     let selectedTags = [];
 
-    // 1. 絞り込み用のタグ（チェックボックス）を動的に生成
+    // 1. 絞り込みタグの生成
     const allTags = new Set();
     ingredientData.forEach(item => {
-        if (item.tags && Array.isArray(item.tags)) { // item.tagsが存在し、配列であることを確認
+        if (item.tags && Array.isArray(item.tags)) {
             item.tags.forEach(tag => allTags.add(tag));
         }
     });
@@ -33,11 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
         filterTagsContainer.appendChild(tagElement);
     });
 
-    // 2. 成分リストをレンダリングする関数
+    // 2. 成分リストをレンダリングする関数 (★ここを更新)
     const renderList = (ingredients) => {
-        ingredientList.innerHTML = ''; 
+        ingredientList.innerHTML = '';
         if (ingredients.length === 0) {
-            ingredientList.innerHTML = '<p>該当する成分が見つかりませんでした。</p>';
+            ingredientList.innerHTML = '<p class="no-results">該当する成分が見つかりませんでした。</p>';
             return;
         }
 
@@ -45,33 +43,45 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('a');
             card.className = 'ingredient-card';
             card.href = `ingredient.html?id=${ingredient.id}`;
+
+            // --- ↓↓↓ ここからが変更箇所 ↓↓↓ ---
+            // カード内に表示するタグのHTMLを生成 (最大3つまで)
+            let tagsHTML = '';
+            if (ingredient.tags && ingredient.tags.length > 0) {
+                tagsHTML = `<div class="card-tags">` + 
+                    ingredient.tags.slice(0, 3).map(tag => `<span>${tag}</span>`).join('') +
+                `</div>`;
+            }
+
             card.innerHTML = `
-                <h3>${ingredient.name}</h3>
-                <p>${ingredient.summary}</p>
+                <div class="card-content">
+                    <h3>${ingredient.name}</h3>
+                    <p>${ingredient.summary}</p>
+                </div>
+                ${tagsHTML}
             `;
+            // --- ↑↑↑ ここまでが変更箇所 ↑↑↑ ---
+
             ingredientList.appendChild(card);
         });
     };
 
-    // 3. 検索と絞り込みを両方考慮して表示を更新する関数
+    // 3. フィルタリングとレンダリング
     const filterAndRender = () => {
         const filteredIngredients = ingredientData.filter(ingredient => {
             const matchesQuery = (
                 ingredient.name.toLowerCase().includes(currentQuery) ||
                 ingredient.summary.toLowerCase().includes(currentQuery)
             );
-
-            const matchesTags = selectedTags.every(tag => 
+            const matchesTags = selectedTags.every(tag =>
                 ingredient.tags && ingredient.tags.includes(tag)
             );
-
             return matchesQuery && matchesTags;
         });
-
         renderList(filteredIngredients);
     };
 
-    // 4. イベントリスナーを設定
+    // 4. イベントリスナー
     searchBox.addEventListener('input', (e) => {
         currentQuery = e.target.value.toLowerCase();
         filterAndRender();
@@ -79,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     filterTagsContainer.addEventListener('change', () => {
         selectedTags = Array.from(document.querySelectorAll('.tag-checkbox:checked'))
-                            .map(checkbox => checkbox.value);
+            .map(checkbox => checkbox.value);
         filterAndRender();
     });
 
