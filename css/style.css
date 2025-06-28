@@ -1,10 +1,31 @@
-/* 基本スタイルとリセット */
+/* css/style.css (修正版) */
+
+/* --- 0. 基本設定と変数 --- */
+:root {
+    --primary-color: #2E8B57; /* SeaGreen - アクセントカラー */
+    --primary-color-light: #eaf6f0; /* 薄い緑 */
+    --text-color: #333333; /* 基本の文字色 */
+    --text-color-light: #555555; /* やや薄い文字色 */
+    --bg-color: #fcfcfc; /* 背景色 */
+    --card-bg-color: #ffffff; /* カードの背景色 */
+    --border-color: #e0e0e0; /* 境界線 */
+    --shadow-color: rgba(0, 0, 0, 0.08); /* 影の色 */
+    
+    --font-family: 'Helvetica Neue', 'Arial', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
+    --border-radius: 12px;
+}
+
+/* --- 1. グローバルスタイル --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    line-height: 1.6;
+    font-family: var(--font-family);
+    line-height: 1.7;
     margin: 0;
-    background-color: #f9f9f9;
-    color: #333;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -15,178 +36,219 @@ main {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 840px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
 a {
-    color: #007bff;
+    color: var(--primary-color);
     text-decoration: none;
+    transition: color 0.2s ease;
 }
 a:hover {
-    text-decoration: underline;
+    color: #256d45;
 }
 
-/* ヘッダー */
+h1, h2, h3 {
+    font-weight: 600;
+}
+
+/* --- 2. ヘッダー --- */
 header {
-    background: #fff;
-    padding: 20px 0;
-    border-bottom: 1px solid #eee;
+    background: var(--card-bg-color);
+    padding: 25px 0;
+    border-bottom: 1px solid var(--border-color);
     text-align: center;
 }
 header h1 {
     margin: 0;
-    font-size: 2rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 header h1 a {
-    color: #333;
+    color: var(--text-color);
     text-decoration: none;
 }
 header p {
-    margin: 5px 0 0;
-    color: #666;
+    margin: 8px 0 0;
+    color: var(--text-color-light);
+    font-size: 1rem;
 }
 
-/* 検索セクション */
+/* --- 3. 検索 & 絞り込みセクション --- */
 .search-section {
-    margin: 40px 0;
+    margin: 40px 0 20px;
+}
+
+#search-box {
+    width: 100%;
+    padding: 15px 25px;
+    font-size: 1.1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+#search-box:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px var(--primary-color-light);
+}
+
+.filter-section {
+    padding: 0 10px;
+    margin-bottom: 40px;
+}
+.filter-section h2 {
+    font-size: 1.1rem;
+    color: var(--text-color-light);
+    margin-bottom: 15px;
     text-align: center;
 }
-#search-box {
-    width: 80%;
-    max-width: 400px;
-    padding: 12px 15px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 25px;
+#filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+.filter-tag input[type="checkbox"] {
+    display: none; /* チェックボックス自体は非表示 */
+}
+.filter-tag label {
+    display: inline-block;
+    padding: 8px 18px;
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    user-select: none;
+}
+.filter-tag label:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+.filter-tag input[type="checkbox"]:checked + label {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
 }
 
-/* 成分一覧カード */
+/* --- 4. 成分一覧カード --- */
+.list-section h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
 #ingredient-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
     margin-bottom: 40px;
 }
 .ingredient-card {
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    padding: 20px;
+    background: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 25px;
     text-align: left;
+    box-shadow: 0 2px 8px var(--shadow-color);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 .ingredient-card:hover {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
     text-decoration: none;
 }
 .ingredient-card h3 {
     margin-top: 0;
-    color: #0056b3;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+    color: var(--text-color);
 }
 .ingredient-card p {
-    color: #555;
-    font-size: 0.9rem;
+    margin: 0;
+    color: var(--text-color-light);
+    font-size: 0.95rem;
 }
 
-/* 成分詳細ページ */
-#ingredient-detail section {
-    background: #fff;
-    padding: 25px;
-    margin-bottom: 25px;
-    border-radius: 8px;
-    border: 1px solid #eee;
+/* --- 5. 成分詳細ページ --- */
+#ingredient-detail {
+    background: var(--card-bg-color);
+    border-radius: var(--border-radius);
+    padding: 20px 40px 40px;
+    margin-top: 40px;
+    border: 1px solid var(--border-color);
 }
-#ingredient-detail h2 {
-    font-size: 2.2rem;
-    margin-bottom: 30px;
+#ingredient-detail h2 { /* 成分名 */
+    font-size: 2.5rem;
     text-align: center;
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 10px;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
 }
-#ingredient-detail h3 {
-    font-size: 1.5rem;
-    margin-top: 0;
-    color: #333;
-    border-left: 5px solid #007bff;
-    padding-left: 10px;
+#ingredient-detail section {
+    margin-bottom: 35px;
+}
+#ingredient-detail h3 { /* 使い方、併用注意など */
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--primary-color-light);
+    color: var(--primary-color);
 }
 #ingredient-detail ul {
     padding-left: 20px;
+    list-style: '🌿 '; /* 絵文字リストマーカー */
+}
+#ingredient-detail li {
+    margin-bottom: 8px;
 }
 
-/* フッター */
+
+/* --- 6. フッター --- */
 footer {
     text-align: center;
-    padding: 20px 0;
-    background: #333;
-    color: #fff;
+    padding: 30px 0;
+    background: #222222;
+    color: #aaaaaa;
     margin-top: auto;
+    font-size: 0.9rem;
 }
 footer p {
     margin: 0;
 }
 
-/* 広告プレースホルダー */
+/* --- 7. 広告プレースホルダー --- */
 .ad-placeholder {
-    background: #e9e9e9;
-    color: #888;
+    background: #f0f0f0;
+    color: #b0b0b0;
     text-align: center;
     padding: 40px 20px;
-    margin: 20px auto;
-    border: 2px dashed #ccc;
-    border-radius: 8px;
+    margin: 30px auto;
+    border: 2px dashed #d0d0d0;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
 }
 
-/* レスポンシブ対応 */
+/* --- 8. レスポンシブ対応 --- */
 @media (max-width: 768px) {
     header h1 {
-        font-size: 1.8rem;
-    }
-    #search-box {
-        width: 100%;
+        font-size: 2rem;
     }
     #ingredient-list {
-        grid-template-columns: 1fr; /* スマホでは1カラムに */
+        grid-template-columns: 1fr; /* スマホでは1カラム */
     }
-}
-
-/* css/style.css */
-
-/* ( ... 既存のスタイルはそのまま ... ) */
-
-/* --- ↓ ファイルの末尾に以下を追加 ↓ --- */
-
-/* 絞り込みセクション */
-.filter-section {
-    background: #fff;
-    padding: 20px 25px;
-    margin-bottom: 40px;
-    border-radius: 8px;
-    border: 1px solid #eee;
-}
-.filter-section h2 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 1.2rem;
-    text-align: left;
-}
-#filter-tags {
-    display: flex;
-    flex-wrap: wrap; /* タグが多い場合に折り返す */
-    gap: 10px 15px; /* タグ間の余白 */
-}
-.filter-tag {
-    display: flex;
-    align-items: center;
-}
-.filter-tag input[type="checkbox"] {
-    margin-right: 5px;
-    cursor: pointer;
-}
-.filter-tag label {
-    cursor: pointer;
-    user-select: none; /* ラベルのテキストを選択できないようにする */
+    #ingredient-detail {
+        padding: 20px;
+    }
+    #ingredient-detail h2 {
+        font-size: 2rem;
+    }
+    #ingredient-detail h3 {
+        font-size: 1.4rem;
+    }
 }
