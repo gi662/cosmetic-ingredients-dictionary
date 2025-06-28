@@ -1,110 +1,97 @@
-/* css/style.css (修正版) */
+/* css/style.css (リッチデザイン版) */
 
 /* --- 0. 基本設定と変数 --- */
 :root {
-    --primary-color: #2E8B57; /* SeaGreen - アクセントカラー */
-    --primary-color-light: #eaf6f0; /* 薄い緑 */
-    --text-color: #333333; /* 基本の文字色 */
-    --text-color-light: #555555; /* やや薄い文字色 */
-    --bg-color: #fcfcfc; /* 背景色 */
-    --card-bg-color: #ffffff; /* カードの背景色 */
-    --border-color: #e0e0e0; /* 境界線 */
-    --shadow-color: rgba(0, 0, 0, 0.08); /* 影の色 */
-    
-    --font-family: 'Helvetica Neue', 'Arial', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
-    --border-radius: 12px;
+    --color-primary: #E6846E;      /* コーラルピンク */
+    --color-primary-light: #FCEAE5; /* 薄いピンク */
+    --color-secondary: #8A9A87;     /* セージグリーン */
+    --color-text: #3D3D3D;         /* 基本の文字色 */
+    --color-text-light: #757575;   /* やや薄い文字色 */
+    --color-bg: #FDFBFA;           /* 背景色 (温かみのあるオフホワイト) */
+    --color-card-bg: #FFFFFF;      /* カードの背景色 */
+    --color-border: #EAEAEA;       /* 境界線 */
+    --shadow-color: rgba(90, 90, 90, 0.1);
+
+    --font-serif: 'Noto Serif JP', serif;
+    --font-sans: 'Noto Sans JP', sans-serif;
+    --border-radius: 16px;
+    --transition-speed: 0.3s;
 }
 
-/* --- 1. グローバルスタイル --- */
+/* --- 1. グローバル & アニメーション --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
 
 body {
-    font-family: var(--font-family);
-    line-height: 1.7;
+    font-family: var(--font-sans);
+    line-height: 1.8;
     margin: 0;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    background-color: var(--color-bg);
+    color: var(--color-text);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-}
-
-main {
-    flex: 1; /* フッターを最下部に固定 */
+    -webkit-font-smoothing: antialiased;
 }
 
 .container {
-    max-width: 840px;
+    max-width: 880px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-a {
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-a:hover {
-    color: #256d45;
-}
-
-h1, h2, h3 {
-    font-weight: 600;
-}
-
 /* --- 2. ヘッダー --- */
 header {
-    background: var(--card-bg-color);
-    padding: 25px 0;
-    border-bottom: 1px solid var(--border-color);
+    background: var(--color-card-bg);
+    padding: 30px 0;
+    border-bottom: 1px solid var(--color-border);
     text-align: center;
 }
 header h1 {
     margin: 0;
-    font-size: 2.5rem;
+    font-family: var(--font-serif);
+    font-size: 2.8rem;
     font-weight: 700;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 }
 header h1 a {
-    color: var(--text-color);
+    color: var(--color-text);
     text-decoration: none;
 }
 header p {
-    margin: 8px 0 0;
-    color: var(--text-color-light);
+    margin: 10px 0 0;
+    color: var(--color-text-light);
     font-size: 1rem;
 }
 
-/* --- 3. 検索 & 絞り込みセクション --- */
+/* --- 3. 検索 & 絞り込み --- */
 .search-section {
-    margin: 40px 0 20px;
+    margin: 50px 0 25px;
 }
-
 #search-box {
     width: 100%;
-    padding: 15px 25px;
+    padding: 16px 25px;
     font-size: 1.1rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
     border-radius: 50px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: all var(--transition-speed) ease;
+    background-color: var(--color-card-bg);
 }
 #search-box:focus {
     outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 4px var(--primary-color-light);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 4px var(--color-primary-light);
 }
 
 .filter-section {
     padding: 0 10px;
-    margin-bottom: 40px;
-}
-.filter-section h2 {
-    font-size: 1.1rem;
-    color: var(--text-color-light);
-    margin-bottom: 15px;
-    text-align: center;
+    margin-bottom: 50px;
 }
 #filter-tags {
     display: flex;
@@ -113,142 +100,191 @@ header p {
     justify-content: center;
 }
 .filter-tag input[type="checkbox"] {
-    display: none; /* チェックボックス自体は非表示 */
+    display: none;
 }
 .filter-tag label {
     display: inline-block;
-    padding: 8px 18px;
-    background-color: var(--card-bg-color);
-    border: 1px solid var(--border-color);
+    padding: 8px 20px;
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
     border-radius: 50px;
     font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text-light);
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    transition: all var(--transition-speed) ease;
     user-select: none;
 }
 .filter-tag label:hover {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    transform: translateY(-2px);
 }
 .filter-tag input[type="checkbox"]:checked + label {
-    background-color: var(--primary-color);
+    background-color: var(--color-primary);
     color: white;
-    border-color: var(--primary-color);
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 10px rgba(230, 132, 110, 0.3);
 }
 
 /* --- 4. 成分一覧カード --- */
 .list-section h2 {
     text-align: center;
-    margin-bottom: 25px;
-    font-size: 1.8rem;
+    margin-bottom: 30px;
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 600;
 }
-
 #ingredient-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
-    margin-bottom: 40px;
+    gap: 30px;
+    margin-bottom: 50px;
 }
 .ingredient-card {
-    background: var(--card-bg-color);
-    border: 1px solid var(--border-color);
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
     border-radius: var(--border-radius);
-    padding: 25px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     text-align: left;
-    box-shadow: 0 2px 8px var(--shadow-color);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    transition: all var(--transition-speed) ease;
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out forwards;
 }
 .ingredient-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(90, 90, 90, 0.15);
     text-decoration: none;
 }
+.card-content {
+    padding: 25px;
+}
 .ingredient-card h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 1.4rem;
-    color: var(--text-color);
+    margin: 0 0 10px 0;
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--color-text);
 }
 .ingredient-card p {
     margin: 0;
-    color: var(--text-color-light);
+    color: var(--color-text-light);
     font-size: 0.95rem;
+}
+.card-tags {
+    padding: 0 25px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.card-tags span {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+.no-results {
+    text-align: center;
+    color: var(--color-text-light);
+    padding: 40px;
 }
 
 /* --- 5. 成分詳細ページ --- */
 #ingredient-detail {
-    background: var(--card-bg-color);
+    background: var(--color-card-bg);
     border-radius: var(--border-radius);
-    padding: 20px 40px 40px;
-    margin-top: 40px;
-    border: 1px solid var(--border-color);
+    padding: 40px 50px 50px;
+    margin-top: 50px;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 4px 15px var(--shadow-color);
 }
 #ingredient-detail h2 { /* 成分名 */
-    font-size: 2.5rem;
+    font-family: var(--font-serif);
+    font-size: 2.8rem;
     text-align: center;
-    margin-bottom: 40px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+#ingredient-tags-detail {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 50px;
+}
+.detail-tag {
+    background-color: var(--color-secondary);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 #ingredient-detail section {
-    margin-bottom: 35px;
+    margin-bottom: 40px;
 }
 #ingredient-detail h3 { /* 使い方、併用注意など */
-    font-size: 1.6rem;
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 600;
     margin-bottom: 15px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--primary-color-light);
-    color: var(--primary-color);
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--color-primary-light);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+}
+#ingredient-detail h3::before {
+    content: '✧';
+    margin-right: 12px;
+    font-size: 1.5rem;
 }
 #ingredient-detail ul {
-    padding-left: 20px;
-    list-style: '🌿 '; /* 絵文字リストマーカー */
+    padding-left: 10px;
+    list-style: none;
 }
 #ingredient-detail li {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    padding-left: 25px;
+    position: relative;
 }
-
+#ingredient-detail li::before {
+    content: '🌿';
+    position: absolute;
+    left: 0;
+    top: 1px;
+    color: var(--color-secondary);
+}
 
 /* --- 6. フッター --- */
 footer {
     text-align: center;
-    padding: 30px 0;
-    background: #222222;
-    color: #aaaaaa;
+    padding: 40px 0;
+    background: #333;
+    color: #bbb;
     margin-top: auto;
     font-size: 0.9rem;
-}
-footer p {
-    margin: 0;
 }
 
 /* --- 7. 広告プレースホルダー --- */
 .ad-placeholder {
-    background: #f0f0f0;
-    color: #b0b0b0;
+    background: #f7f7f7;
+    color: #ccc;
     text-align: center;
     padding: 40px 20px;
-    margin: 30px auto;
-    border: 2px dashed #d0d0d0;
+    margin: 40px auto;
+    border: 2px dashed #e0e0e0;
     border-radius: var(--border-radius);
-    font-size: 0.9rem;
 }
 
 /* --- 8. レスポンシブ対応 --- */
 @media (max-width: 768px) {
-    header h1 {
-        font-size: 2rem;
-    }
-    #ingredient-list {
-        grid-template-columns: 1fr; /* スマホでは1カラム */
-    }
-    #ingredient-detail {
-        padding: 20px;
-    }
-    #ingredient-detail h2 {
-        font-size: 2rem;
-    }
-    #ingredient-detail h3 {
-        font-size: 1.4rem;
-    }
+    header h1 { font-size: 2.2rem; }
+    #ingredient-list { grid-template-columns: 1fr; gap: 25px; }
+    #ingredient-detail { padding: 30px 25px; }
+    #ingredient-detail h2 { font-size: 2.2rem; }
+    #ingredient-detail h3 { font-size: 1.5rem; }
 }
