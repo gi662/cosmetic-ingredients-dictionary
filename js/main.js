@@ -1,6 +1,21 @@
 // js/main.js (更新版)
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    // --- ↓↓↓ ここからが変更箇所 ↓↓↓ ---
+
+    // ★★★ データの並べ替え処理を追加 ★★★
+    // ページが読み込まれた最初に一度だけ、データを「アルファベット順→五十音順」に並べ替える。
+    if (typeof ingredientData !== 'undefined' && Array.isArray(ingredientData)) {
+        ingredientData.sort((a, b) => {
+            // localeCompare を使うと、数字・アルファベット・五十音の順で賢く並べてくれる
+            return a.name.localeCompare(b.name, 'ja');
+        });
+    }
+
+    // --- ↑↑↑ ここまでが変更箇所 ↑↑↑ ---
+
+
     const ingredientList = document.getElementById('ingredient-list');
     const searchBox = document.getElementById('search-box');
     const filterTagsContainer = document.getElementById('filter-tags');
@@ -31,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         filterTagsContainer.appendChild(tagElement);
     });
 
-    // 2. 成分リストをレンダリングする関数 (★ここを更新)
+    // 2. 成分リストをレンダリングする関数
     const renderList = (ingredients) => {
         ingredientList.innerHTML = '';
         if (ingredients.length === 0) {
@@ -44,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
             card.className = 'ingredient-card';
             card.href = `ingredient.html?id=${ingredient.id}`;
 
-            // --- ↓↓↓ ここからが変更箇所 ↓↓↓ ---
             // カード内に表示するタグのHTMLを生成 (最大3つまで)
             let tagsHTML = '';
             if (ingredient.tags && ingredient.tags.length > 0) {
@@ -60,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 ${tagsHTML}
             `;
-            // --- ↑↑↑ ここまでが変更箇所 ↑↑↑ ---
 
             ingredientList.appendChild(card);
         });
