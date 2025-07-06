@@ -253,16 +253,29 @@
         </div>
     </footer>
 
-    <!-- ===== ここからモーダル ===== -->
+        <!-- ... footer の後 ... -->
+    <footer>
+        <div class="container">
+            <p>© 2023 美容成分辞典</p>
+        </div>
+    </footer>
+
+    <!-- ===== ↓↓↓ この部分を index.html に追加 ↓↓↓ ===== -->
     <div id="ingredient-modal" class="modal">
         <div class="modal-content">
             <span class="close-button">×</span>
             <div id="modal-body">
-                <!-- 詳細情報がここに挿入される -->
+                <!-- JavaScriptによって詳細情報がここに挿入されます -->
             </div>
         </div>
     </div>
-    <!-- ===== ここまでモーダル ===== -->
+    <!-- ===== ↑↑↑ ここまでを追加 ↑↑↑ ===== -->
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+</html>
 
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
