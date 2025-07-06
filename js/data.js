@@ -222,7 +222,7 @@ const ingredientData = [
       cautions: "レチノールやピーリング成分と併用すると刺激を感じることがある。",
       sideEffects: "種類や濃度によっては、乾燥やピリピリとした刺激を感じることがある。",
       products: [
-        { name: "〇〇VCローション", link: "ここに「〇〇VCローション」のリンク" },
+        { name: "メラノCC 薬用しみ集中対策プレミアム美容液", link: "https://amzn.to/40wJtss" },
         { name: "△△Cセラム", link: "ここに「△△Cセラム」のリンク" }
       ]
     }
