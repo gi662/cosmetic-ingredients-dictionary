@@ -3,51 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>成分詳細 | 美容成分辞典</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>成分詳細 - 美容成分辞典</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
     <header>
         <div class="container">
-            <h1><a href="index.html">美容成分辞典</a></h1>
+            <h1><a href="./index.html">美容成分辞典</a></h1>
+            <p>気になる美容成分の効果や使い方をチェック</p>
         </div>
     </header>
 
     <main class="container">
-        <!-- Google AdSense 広告コード（例：記事タイトル下） -->
-        <div class="ad-placeholder">ここにAdSense広告（例: レクタングル）</div>
-
+        <!-- 詳細情報がここに描画される -->
         <article id="ingredient-detail">
-            <!-- JavaScriptによって内容がここに生成されます -->
-            <h2 id="ingredient-name"></h2>
-            <div id="ingredient-tags-detail"></div> 
-            <section id="usage-section">
-                <h3>使い方</h3>
-                <p id="ingredient-usage"></p>
-            </section>
-            
-            <section id="cautions-section">
-                <h3>併用注意</h3>
-                <p id="ingredient-cautions"></p>
-            </section>
-            
-            <section id="side-effects-section">
-                <h3>副作用</h3>
-                <p id="ingredient-side-effects"></p>
-            </section>
-            
-            <section id="products-section">
-                <h3>配合されている商品例</h3>
-                <ul id="ingredient-products"></ul>
-            </section>
+            <!-- JavaScriptによって内容が生成されます -->
         </article>
-
-        <!-- Google AdSense 広告コード（例：記事下） -->
-        <div class="ad-placeholder" style="margin-top: 40px;">ここにAdSense広告（例: レクタングル）</div>
-
     </main>
 
     <footer>
@@ -57,6 +32,7 @@
     </footer>
 
     <script src="js/data.js"></script>
-    <script src="js/ingredient.js"></script>
+    <script src="js/detail.js"></script>
+
 </body>
 </html>
