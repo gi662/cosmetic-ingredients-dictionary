@@ -200,6 +200,7 @@ header p {
     border-radius: var(--border-radius);
     padding: 40px 50px 50px;
     margin-top: 50px;
+    margin-bottom: 50px;
     border: 1px solid var(--color-border);
     box-shadow: 0 4px 15px var(--shadow-color);
 }
