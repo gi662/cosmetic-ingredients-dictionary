@@ -222,7 +222,7 @@ const ingredientData = [
       sideEffects: "種類や濃度によっては、乾燥やピリピリとした刺激を感じることがある。",
       products: [
         { name: "メラノCC 薬用しみ集中対策プレミアム美容液 20ml", link: "https://amzn.to/44EB9Z1" },
-        { name: "△△Cセラム", link: "ここに「△△Cセラム」のリンク" }
+        { name: "COSRX ビタミンｃ23美容液 20ml", link: "https://amzn.to/3U1UvCc" }
       ]
     }
   },
