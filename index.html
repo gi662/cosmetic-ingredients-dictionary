@@ -6,241 +6,34 @@
     <title>美容成分辞典</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- 外部CSSファイル（style.css）へのリンクは削除し、以下のstyleタグに統合しました -->
-    <style>
-        /* 基本スタイル */
-        body {
-            font-family: 'Noto Sans JP', sans-serif;
-            line-height: 1.7;
-            color: #333;
-            background-color: #f9f9f9;
-            margin: 0;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* ヘッダー */
-        header {
-            background-color: #333;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-weight: 700;
-            font-size: 2em;
-        }
-        header p {
-            margin: 5px 0 0;
-            color: #ccc;
-        }
-
-        /* メインコンテンツ */
-        main {
-            padding: 30px 0;
-        }
-        section {
-            background-color: white;
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-        h2 {
-            font-size: 1.5em;
-            margin-top: 0;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        /* 検索と絞り込み */
-        #search-box {
-            width: 100%;
-            padding: 12px;
-            font-size: 1em;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        #filter-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .filter-tag {
-            background-color: #e9ecef;
-            border: 1px solid #dee2e6;
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 0.9em;
-        }
-        .filter-tag:hover {
-            background-color: #ced4da;
-        }
-        .filter-tag.active {
-            background-color: #007bff;
-            color: white;
-            border-color: #007bff;
-            font-weight: bold;
-        }
-
-        /* 成分一覧カード */
-        #ingredient-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .ingredient-card {
-            background-color: #fff;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            padding: 20px;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .ingredient-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .card-title {
-            font-size: 1.2em;
-            margin: 0 0 10px;
-            color: #0056b3;
-        }
-        .card-tags {
-            margin-bottom: 10px;
-        }
-        .card-tag {
-            display: inline-block;
-            background-color: #6c757d;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.75em;
-            margin-right: 4px;
-            margin-bottom: 4px;
-        }
-        .card-summary {
-            font-size: 0.9em;
-            color: #555;
-            margin: 0;
-        }
-        
-        /* 広告プレースホルダー */
-        .ad-placeholder {
-            background-color: #f0f0f0;
-            text-align: center;
-            padding: 60px 20px;
-            margin-bottom: 30px;
-            border-radius: 8px;
-            color: #888;
-        }
-        
-        /* フッター */
-        footer {
-            text-align: center;
-            padding: 20px 0;
-            background-color: #333;
-            color: #aaa;
-            font-size: 0.9em;
-        }
-
-        /* --- モーダルウィンドウのスタイル --- */
-        .modal {
-            display: none; /* 初期状態では非表示 */
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.6);
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 30px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 700px;
-            border-radius: 8px;
-            position: relative;
-            animation: fadeIn 0.3s;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .close-button {
-            color: #aaa;
-            position: absolute;
-            top: 15px;
-            right: 25px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .close-button:hover,
-        .close-button:focus {
-            color: black;
-        }
-        #modal-body h3 {
-             margin-top: 25px;
-             color: #0056b3;
-             border-left: 4px solid #007bff;
-             padding-left: 10px;
-        }
-        #modal-body .product-list {
-            list-style: '🛒';
-            padding-left: 20px;
-        }
-         #modal-body .product-list li {
-            margin-bottom: 8px;
-        }
-        #modal-body a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        #modal-body a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
     <header>
         <div class="container">
-            <h1>美容成分辞典</h1>
+            <h1><a href="./index.html">美容成分辞典</a></h1>
             <p>気になる美容成分の効果や使い方をチェック</p>
         </div>
     </header>
 
     <main class="container">
-        <!-- Google AdSense 広告コード（例：ヘッダー下） -->
-        <div class="ad-placeholder">ここにAdSense広告（例: レクタングル）</div>
-
         <section class="search-section">
-            <h2>成分を検索</h2>
-            <input type="search" id="search-box" placeholder="「ヒアルロン酸」などで検索...">
+            <input type="search" id="search-box" placeholder="「ヒアルロン酸」や「レチノール」で検索...">
         </section>
 
         <section class="filter-section">
-            <h2>効能で絞り込む</h2>
             <div id="filter-tags">
                 <!-- JavaScriptによって絞り込みタグがここに生成されます -->
             </div>
         </section>
+        
+        <!-- Google AdSense 広告コード（例） -->
+        <div class="ad-placeholder">ここにAdSense広告（例: レクタングル）</div>
 
         <section class="list-section">
-            <h2 id="list-title">成分一覧</h2>
+            <h2>成分一覧</h2>
             <div id="ingredient-list">
                 <!-- JavaScriptによって成分一覧がここに生成されます -->
             </div>
@@ -252,30 +45,6 @@
             <p>© 2023 美容成分辞典</p>
         </div>
     </footer>
-
-        <!-- ... footer の後 ... -->
-    <footer>
-        <div class="container">
-            <p>© 2023 美容成分辞典</p>
-        </div>
-    </footer>
-
-    <!-- ===== ↓↓↓ この部分を index.html に追加 ↓↓↓ ===== -->
-    <div id="ingredient-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">×</span>
-            <div id="modal-body">
-                <!-- JavaScriptによって詳細情報がここに挿入されます -->
-            </div>
-        </div>
-    </div>
-    <!-- ===== ↑↑↑ ここまでを追加 ↑↑↑ ===== -->
-
-    <script src="js/data.js"></script>
-    <script src="js/main.js"></script>
-
-</body>
-</html>
 
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
