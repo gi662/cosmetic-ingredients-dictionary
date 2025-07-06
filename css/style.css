@@ -1,4 +1,4 @@
-/* css/style.css (リッチデザイン版) */
+/* css/style.css (リッチデザイン版 + モーダル) */
 
 /* --- 0. 基本設定と変数 --- */
 :root {
@@ -151,6 +151,7 @@ header p {
     justify-content: space-between;
     text-align: left;
     transition: all var(--transition-speed) ease;
+    cursor: pointer; /* クリックできることを示す */
     opacity: 0;
     animation: fadeIn 0.6s ease-out forwards;
 }
@@ -191,72 +192,7 @@ header p {
     text-align: center;
     color: var(--color-text-light);
     padding: 40px;
-}
-
-/* --- 5. 成分詳細ページ --- */
-#ingredient-detail {
-    background: var(--color-card-bg);
-    border-radius: var(--border-radius);
-    padding: 40px 50px 50px;
-    margin-top: 50px;
-    border: 1px solid var(--color-border);
-    box-shadow: 0 4px 15px var(--shadow-color);
-}
-#ingredient-detail h2 { /* 成分名 */
-    font-family: var(--font-serif);
-    font-size: 2.8rem;
-    text-align: center;
-    margin-bottom: 20px;
-}
-#ingredient-tags-detail {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 50px;
-}
-.detail-tag {
-    background-color: var(--color-secondary);
-    color: white;
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-#ingredient-detail section {
-    margin-bottom: 40px;
-}
-#ingredient-detail h3 { /* 使い方、併用注意など */
-    font-family: var(--font-serif);
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--color-primary-light);
-    color: var(--color-primary);
-    display: flex;
-    align-items: center;
-}
-#ingredient-detail h3::before {
-    content: '✧';
-    margin-right: 12px;
-    font-size: 1.5rem;
-}
-#ingredient-detail ul {
-    padding-left: 10px;
-    list-style: none;
-}
-#ingredient-detail li {
-    margin-bottom: 10px;
-    padding-left: 25px;
-    position: relative;
-}
-#ingredient-detail li::before {
-    content: '🌿';
-    position: absolute;
-    left: 0;
-    top: 1px;
-    color: var(--color-secondary);
+    grid-column: 1 / -1; /* グリッド全体に表示 */
 }
 
 /* --- 6. フッター --- */
@@ -284,7 +220,143 @@ footer {
 @media (max-width: 768px) {
     header h1 { font-size: 2.2rem; }
     #ingredient-list { grid-template-columns: 1fr; gap: 25px; }
-    #ingredient-detail { padding: 30px 25px; }
-    #ingredient-detail h2 { font-size: 2.2rem; }
-    #ingredient-detail h3 { font-size: 1.5rem; }
+}
+
+/* --- 9. モーダルウィンドウ --- */
+.modal {
+    display: none; /* 初期状態では非表示 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* スクロール可能に */
+    background-color: rgba(61, 61, 61, 0.7); /* 背景を少し暗くする */
+    -webkit-backdrop-filter: blur(5px); /* 背景をぼかす (Safari向け) */
+    backdrop-filter: blur(5px); /* 背景をぼかす */
+    padding: 20px 0;
+}
+
+.modal-content {
+    background-color: var(--color-card-bg);
+    margin: 5% auto;
+    padding: 40px 50px 50px;
+    border: 1px solid var(--color-border);
+    width: 90%;
+    max-width: 720px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: fadeIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); /* 少しリッチなアニメーション */
+}
+
+.close-button {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    color: #aaa;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--color-primary);
+    transform: rotate(90deg);
+}
+
+/* モーダル内のコンテンツスタイル (詳細ページスタイルを継承・調整) */
+#modal-body h2 { /* 成分名 */
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--color-text);
+}
+
+#modal-body .modal-tags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+#modal-body .modal-tag {
+    background-color: var(--color-secondary);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+#modal-body p.modal-summary {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--color-text-light);
+    background-color: var(--color-bg);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+}
+
+#modal-body h3 { /* 使い方、関連商品など */
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--color-primary-light);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+}
+
+#modal-body h3::before {
+    content: '✧';
+    margin-right: 12px;
+    font-size: 1.5rem;
+}
+
+#modal-body .product-list {
+    padding-left: 10px;
+    list-style: none;
+}
+#modal-body .product-list li {
+    margin-bottom: 12px;
+    padding-left: 30px;
+    position: relative;
+}
+#modal-body .product-list li::before {
+    content: '🌿'; /* 詳細ページのリストスタイルを継承 */
+    position: absolute;
+    left: 0;
+    top: 1px;
+    color: var(--color-secondary);
+}
+#modal-body .product-list a {
+    color: var(--color-primary);
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--transition-speed);
+}
+#modal-body .product-list a:hover {
+    border-bottom: 1px solid var(--color-primary-light);
+}
+
+/* モーダルのレスポンシブ対応 */
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 30px 25px;
+        margin-top: 20px;
+    }
+    #modal-body h2 { font-size: 2rem; }
+    #modal-body h3 { font-size: 1.5rem; }
 }
