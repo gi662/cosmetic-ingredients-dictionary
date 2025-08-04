@@ -1377,7 +1377,7 @@ const ingredientData = [
       cautions: "特になし。",
       sideEffects: "副作用はほとんどない。",
       products: [
-        { name: "イプサ ザ・タイムR アクア", link: "ここに「イプサ ザ・タイムR アクア」のリンク" }
+        { name: "イプサ ザ・タイムR アクア", link: "https://amzn.to/41kmLUM" }
       ]
     }
   },
